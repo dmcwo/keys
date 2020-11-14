@@ -24,6 +24,29 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 repository: "dmcwo/keys"
 
+collections:
+    quotes:
+        output: true
+        sort_by: title
+        permalink: /:collection/:title
+        low-nav: yes
+    books:
+        output: true
+        sort_by: title
+        permalink: /:collection/:title
+
+defaults:
+    -
+        scope:
+            type: quotes
+        values:
+            layout: quote
+    -
+        scope:
+            type: books
+        values:
+            layout: book
+
 # Build settings
 plugins:
   - jekyll-feed

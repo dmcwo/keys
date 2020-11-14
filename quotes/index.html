@@ -1,0 +1,80 @@
+---
+layout: page
+title: Quotes
+---
+<div class="row">
+<!-- Blog Entries Column -->
+<div class="col-8 mx-auto">
+{% for quote in site.quotes %}
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <!--<p class="card-header">{{ quote.date | date: '%B %d, %Y' }}</p>-->
+            <!--
+            {% if quote.banner-img %}-->
+                <!--<img class="card-img-top rounded-0 img-fluid mx-auto" src="{{ post.banner-img }}" alt="{{ post.banner-img-alt }}">-->
+            <!--
+            <a href="{{ quote.url | absolute_url }}"><img class="card-img-top" src="{{ quote.banner-img }}" alt="{% if quote.banner-img-alt %}{{ quote.banner-img-alt }}{% else %}{{ quote.title }}{% endif %}"></a>
+            {% endif %}
+            -->
+            <div class="card-body"> 
+            <p class="card-text">{{ quote.quote | strip_html }}</p>
+          </div>
+          <div class="card-footer text-muted">
+              <cite style="float: left;">- <a href="{{ quote.worldcat }}">{{ quote.title }}{% if quote.author %}<span class="text-muted"> by {{ quote.author }}</span>{% endif %}</a></cite>
+              <a style="float: right;" href="{{ quote.url | absolute_url }}"><i class="fas fa-expand-arrows-alt" aria-label="full screen"></i></a>
+          </div>
+          
+        </div>
+{% endfor %}
+    </div>
+</div>
+
+          
+          
+          <hr>
+<!-- End Blog Entries Column -->
+
+
+      <!-- Sidebar Widgets Column -->
+<div class="row">
+      <div class="col-md-4">
+          
+           <!-- Categories Widget -->
+
+          <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                    {% assign categories_list = site.quotes | map: 'categories' %}
+                    {% if categories_list.first[0] == null %}
+                        {% for category in categories_list %}
+                            {% capture cat-url %}categories#{{ category[0] | downcase | downcase | url_escape | strip | replace: ' ', '-' }}{% endcapture %}
+                            <li><a href="{{ cat-url | absolute_url }}">{{ category | camelcase }} ({{ site.tags[category].size }})</a></li>
+                        {% endfor %}
+                    {% else %}
+                        {% for category in categories_list %}
+                        {% capture cat-url %}categories#{{ category[0] | downcase | downcase | url_escape | strip | replace: ' ', '-' }}{% endcapture %}
+                        <li><a href="{{ cat-url | absolute_url }}">{{ category[0] | camelcase }} ({{ category[1].size }})</a></li>
+                    {% endfor %}
+                {% endif %}
+                {% assign categories_list = nil %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Side Widget -->
+<!--
+        <div class="card my-4">
+          <h5 class="card-header">Side Widget</h5>
+          <div class="card-body">
+            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+          </div>
+          </div>
+-->
+</div>
+</div>
